@@ -28,11 +28,78 @@ function setupAdminTabs() {
 }
 
 function renderAdminTables() {
+  updateDashboardMetrics();
+  renderPendingInquiriesTable();
+  renderCompletedInquiriesTable();
   renderEventsTable();
   renderAnnouncementsTable();
   renderOfficersTable();
-  renderInquiriesTable();
   loadSettingsForm();
+}
+
+function updateDashboardMetrics() {
+  const pending = db.getPendingInquiries();
+  const completed = db.getCompletedInquiries();
+  const events = db.getEvents();
+  const officers = db.getOfficers();
+
+  document.getElementById("stat-pending").textContent = pending.length;
+  document.getElementById("stat-completed").textContent = completed.length;
+  document.getElementById("stat-events").textContent = events.length;
+  document.getElementById("stat-officers").textContent = officers.length;
+
+  document.getElementById("pending-count-badge").textContent = `${pending.length} Pending`;
+  document.getElementById("completed-count-badge").textContent = `${completed.length} Resolved`;
+}
+
+function renderPendingInquiriesTable() {
+  const tbody = document.getElementById("admin-pending-inquiries-list");
+  if (!tbody) return;
+
+  const inquiries = db.getPendingInquiries();
+  if (inquiries.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">No pending inquiries found.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = inquiries.map(i => `
+    <tr>
+      <td>${i.date}</td>
+      <td><strong>${i.name}</strong></td>
+      <td><a href="mailto:${i.email}" style="color: var(--primary); text-decoration: underline;">${i.email}</a></td>
+      <td style="max-width: 300px; line-height: 1.4;">${i.message}</td>
+      <td>
+        <div style="display: flex; gap: 6px;">
+          <button class="btn btn-primary btn-sm" onclick="markInquiryCompletedItem('${i.id}')">✓ Complete</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteInquiryItem('${i.id}')">Delete</button>
+        </div>
+      </td>
+    </tr>
+  `).join("");
+}
+
+function renderCompletedInquiriesTable() {
+  const tbody = document.getElementById("admin-completed-inquiries-list");
+  if (!tbody) return;
+
+  const inquiries = db.getCompletedInquiries();
+  if (inquiries.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 2rem;">No completed inquiries yet.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = inquiries.map(i => `
+    <tr>
+      <td>${i.date}</td>
+      <td><span class="badge badge-pinned">${i.completedDate || 'Resolved'}</span></td>
+      <td><strong>${i.name}</strong></td>
+      <td><a href="mailto:${i.email}">${i.email}</a></td>
+      <td style="max-width: 300px; line-height: 1.4;">${i.message}</td>
+      <td>
+        <button class="btn btn-danger btn-sm" onclick="deleteInquiryItem('${i.id}')">Delete</button>
+      </td>
+    </tr>
+  `).join("");
 }
 
 function renderEventsTable() {
@@ -86,29 +153,6 @@ function renderOfficersTable() {
   `).join("");
 }
 
-function renderInquiriesTable() {
-  const tbody = document.getElementById("admin-inquiries-list");
-  if (!tbody) return;
-
-  const inquiries = db.getInquiries();
-  if (inquiries.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="5" class="text-muted" style="text-align: center;">No inquiries received yet.</td></tr>`;
-    return;
-  }
-
-  tbody.innerHTML = inquiries.map(i => `
-    <tr>
-      <td>${i.date}</td>
-      <td><strong>${i.name}</strong></td>
-      <td><a href="mailto:${i.email}">${i.email}</a></td>
-      <td>${i.message}</td>
-      <td>
-        <button class="btn btn-danger btn-sm" onclick="deleteInquiryItem('${i.id}')">Delete</button>
-      </td>
-    </tr>
-  `).join("");
-}
-
 function loadSettingsForm() {
   const settings = db.getSettings();
   if (document.getElementById("set-email")) {
@@ -155,31 +199,36 @@ function closeModal() {
   document.getElementById("admin-modal").classList.remove("open");
 }
 
+window.markInquiryCompletedItem = function(id) {
+  db.markInquiryCompleted(id);
+  renderAdminTables();
+};
+
+window.deleteInquiryItem = function(id) {
+  if (confirm("Are you sure you want to delete this inquiry entry?")) {
+    db.deleteInquiry(id);
+    renderAdminTables();
+  }
+};
+
 window.deleteEventItem = function(id) {
   if (confirm("Are you sure you want to delete this event?")) {
     db.deleteEvent(id);
-    renderEventsTable();
+    renderAdminTables();
   }
 };
 
 window.deleteAnnouncementItem = function(id) {
   if (confirm("Are you sure you want to delete this announcement?")) {
     db.deleteAnnouncement(id);
-    renderAnnouncementsTable();
+    renderAdminTables();
   }
 };
 
 window.deleteOfficerItem = function(id) {
   if (confirm("Are you sure you want to delete this officer?")) {
     db.deleteOfficer(id);
-    renderOfficersTable();
-  }
-};
-
-window.deleteInquiryItem = function(id) {
-  if (confirm("Are you sure you want to delete this inquiry?")) {
-    db.deleteInquiry(id);
-    renderInquiriesTable();
+    renderAdminTables();
   }
 };
 
@@ -212,6 +261,7 @@ window.handleFormSubmit = function(event, type) {
     });
     renderOfficersTable();
   }
+  updateDashboardMetrics();
   closeModal();
 };
 
