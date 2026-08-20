@@ -60,18 +60,18 @@
 
       <div class="card" style="padding: 2rem;">
         <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Send a Message</h3>
-        <form onsubmit="event.preventDefault(); showToast('Message sent! We will respond shortly.');">
+        <form id="contact-form">
           <div class="form-group">
             <label>Full Name</label>
-            <input type="text" class="form-control" required>
+            <input type="text" id="contact-name" class="form-control" required>
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" class="form-control" required>
+            <input type="email" id="contact-email" class="form-control" required>
           </div>
           <div class="form-group">
             <label>Message</label>
-            <textarea class="form-control" rows="4" required></textarea>
+            <textarea id="contact-message" class="form-control" rows="4" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Inquiry</button>
         </form>
