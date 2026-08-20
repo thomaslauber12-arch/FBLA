@@ -5,6 +5,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   setupNavigation();
   setupClipboardCopy();
+  setupContactForm();
   routePageRenderer();
 });
 
@@ -32,6 +33,23 @@ function setupClipboardCopy() {
         });
       }
     });
+  });
+}
+
+function setupContactForm() {
+  const form = document.getElementById("contact-form");
+  if (!form) return;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    const name = document.getElementById("contact-name").value;
+    const email = document.getElementById("contact-email").value;
+    const message = document.getElementById("contact-message").value;
+
+    db.saveInquiry({ name, email, message });
+    showToast("Message sent! We will respond shortly.");
+    form.reset();
   });
 }
 
