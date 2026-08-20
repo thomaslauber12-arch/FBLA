@@ -7,10 +7,13 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
   <header class="header">
     <div class="nav-container">
-      <div class="brand"><span class="brand-badge">SEBHS</span> FBLA</div>
-      <button class="mobile-toggle">☰</button>
+      <a href="index.html" class="brand-branding">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/Future_Business_Leaders_of_America_logo.svg/1200px-Future_Business_Leaders_of_America_logo.svg.png" alt="FBLA Logo" class="nav-logo">
+        <span class="brand"><span class="brand-badge">SEBHS</span> FBLA</span>
+      </a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html" class="active">About</a></li>
@@ -23,36 +26,65 @@
     </div>
   </header>
 
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Mission & Values</div>
+      <h1>Building Tomorrow's Business Leaders</h1>
+      <p>Southeast Bulloch High School FBLA brings business education and students together in a positive working relationship through innovative leadership and career development programs.</p>
+    </div>
+  </section>
+
   <main class="container">
-    <div class="section-header">
-      <h2>About Our Chapter</h2>
-      <p>Building character, confidence, and real-world business expertise.</p>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-bottom: 4rem;">
+      <div class="card">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+        <h3 class="card-title">Our Mission</h3>
+        <p class="card-text">FBLA inspires and prepares students to become community-minded business leaders in a global society through relevant career preparation and leadership experiences.</p>
+      </div>
+      <div class="card">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚀</div>
+        <h3 class="card-title">Our Vision</h3>
+        <p class="card-text">To empower every Southeast Bulloch High School member with practical business knowledge, public speaking confidence, and ethical decision-making capabilities.</p>
+      </div>
+      <div class="card">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏆</div>
+        <h3 class="card-title">Excellence & Competition</h3>
+        <p class="card-text">Our chapter regularly competes at Regional, State, and National Leadership Conferences across financial analysis, software development, and public speaking.</p>
+      </div>
     </div>
 
-    <div style="max-width: 800px; margin: 0 auto; display: grid; gap: 2rem;">
-      <div class="card" style="padding: 2rem;">
-        <h3 style="color: var(--primary); margin-bottom: 0.75rem;">What is FBLA?</h3>
-        <p>Future Business Leaders of America (FBLA) is the largest career student business organization in the world. It helps high school students prepare for careers in business through academic competitions, leadership development, and community service programs.</p>
-      </div>
+    <div class="section-header">
+      <h2>Core Pillars of FBLA</h2>
+      <p>Four strategic focuses guiding our chapter's calendar and student development.</p>
+    </div>
 
-      <div class="card" style="padding: 2rem;">
-        <h3 style="color: var(--primary); margin-bottom: 0.75rem;">Core Mission</h3>
-        <p>Our mission at Southeast Bulloch High School is to inspire and prepare community-minded student leaders for success in a global economy through relevant career experiences and leadership development.</p>
+    <div class="grid">
+      <div class="card">
+        <span class="badge badge-upcoming" style="margin-bottom: 0.75rem;">Pillar 01</span>
+        <h3 class="card-title">Leadership Development</h3>
+        <p class="card-text">Participate in workshops, officer roles, and committee positions that teach project management, delegation, and strategic planning.</p>
       </div>
-
-      <div class="card" style="padding: 2rem;">
-        <h3 style="color: var(--primary); margin-bottom: 0.75rem;">Why Join SEBHS FBLA?</h3>
-        <ul style="margin-left: 1.25rem; color: var(--text-muted); display: grid; gap: 0.5rem;">
-          <li><strong>Competitive Edge:</strong> Over 70 state and national events in finance, coding, design, and public speaking.</li>
-          <li><strong>Leadership Roles:</strong> Local officer opportunities and state leadership delegate roles.</li>
-          <li><strong>Networking & Recognition:</strong> College resume building, scholarships, and state-wide conference trips.</li>
-        </ul>
+      <div class="card">
+        <span class="badge badge-upcoming" style="margin-bottom: 0.75rem;">Pillar 02</span>
+        <h3 class="card-title">Competitive Events</h3>
+        <p class="card-text">Test your academic knowledge and technical prowess in over 70 official FBLA events spanning finance, IT, design, and marketing.</p>
+      </div>
+      <div class="card">
+        <span class="badge badge-upcoming" style="margin-bottom: 0.75rem;">Pillar 03</span>
+        <h3 class="card-title">Community Service</h3>
+        <p class="card-text">Engage with Bulloch County through food drives, local business partnerships, and charitable initiatives supporting March of Dimes.</p>
       </div>
     </div>
   </main>
 
-  <footer>
-    <div class="footer-bottom">&copy; 2026 Southeast Bulloch High School FBLA. All rights reserved.</div>
+  <footer class="footer">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/Future_Business_Leaders_of_America_logo.svg/1200px-Future_Business_Leaders_of_America_logo.svg.png" alt="FBLA Logo" height="36">
+        <span style="font-weight: 700; color: #ffffff;">Southeast Bulloch High School FBLA</span>
+      </div>
+      <div>&copy; 2026 SEBHS FBLA. All rights reserved.</div>
+    </div>
   </footer>
 
   <script src="js/data.js"></script>
