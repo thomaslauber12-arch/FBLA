@@ -92,8 +92,27 @@ class DataStore {
       localStorage.setItem("sehs_fbla_announcements", JSON.stringify(SEED_DATA.announcements));
       localStorage.setItem("sehs_fbla_officers", JSON.stringify(SEED_DATA.officers));
       localStorage.setItem("sehs_fbla_settings", JSON.stringify(SEED_DATA.settings));
+      localStorage.setItem("sehs_fbla_inquiries", JSON.stringify([]));
       localStorage.setItem("sehs_fbla_initialized", "true");
     }
+  }
+
+  // Inquiries
+  getInquiries() {
+    return JSON.parse(localStorage.getItem("sehs_fbla_inquiries") || "[]");
+  }
+
+  saveInquiry(inquiry) {
+    const inquiries = this.getInquiries();
+    inquiry.id = "inq-" + Date.now();
+    inquiry.date = new Date().toLocaleDateString();
+    inquiries.unshift(inquiry);
+    localStorage.setItem("sehs_fbla_inquiries", JSON.stringify(inquiries));
+  }
+
+  deleteInquiry(id) {
+    const inquiries = this.getInquiries().filter(i => i.id !== id);
+    localStorage.setItem("sehs_fbla_inquiries", JSON.stringify(inquiries));
   }
 
   // Events
