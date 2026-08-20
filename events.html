@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events | SEHS FBLA</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="nav-container">
+      <div class="brand"><span class="brand-badge">SEHS</span> FBLA</div>
+      <button class="mobile-toggle">☰</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="events.html" class="active">Events</a></li>
+        <li><a href="announcements.html">Announcements</a></li>
+        <li><a href="officers.html">Officers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html" class="admin-link">Portal</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="section-header">
+      <h2>Chapter Events Schedule</h2>
+      <p>Upcoming conferences, workshops, and chapter milestones.</p>
+    </div>
+
+    <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Upcoming Events</h3>
+    <div class="grid" id="upcoming-events-grid" style="margin-bottom: 3rem;"></div>
+
+    <h3 style="margin-bottom: 1.5rem; color: var(--text-muted);">Past Events Archive</h3>
+    <div class="grid" id="past-events-grid"></div>
+  </main>
+
+  <footer>
+    <div class="footer-bottom">&copy; 2026 Southeast Bulloch High School FBLA. All rights reserved.</div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
