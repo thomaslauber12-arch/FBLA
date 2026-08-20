@@ -3,17 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Southeast Bulloch High School FBLA</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>SEBHS FBLA | Southeast Bulloch High School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #003366;
+      --primary-dark: #002244;
+      --secondary: #f2a900;
+      --bg-body: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -4px rgba(0,0,0,0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-body); color: var(--text); line-height: 1.6; }
+
+    /* Header & Navigation */
+    .header { background: var(--surface); border-bottom: 3px solid var(--secondary); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0.85rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .brand-group { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .brand-logo { height: 40px; width: auto; object-fit: contain; }
+    .brand-title { font-weight: 800; font-size: 1.2rem; color: var(--primary); letter-spacing: -0.02em; }
+    .brand-badge { background: var(--primary); color: #fff; padding: 0.2rem 0.5rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; }
+    
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+    .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+    .nav-links .portal-btn { background: var(--primary); color: #fff !important; padding: 0.5rem 1rem; border-radius: 8px; }
+    .nav-links .portal-btn:hover { background: var(--primary-dark); }
+
+    /* Hero Banner */
+    .hero { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); color: #fff; padding: 5rem 1.5rem; text-align: center; }
+    .hero-content { max-width: 800px; margin: 0 auto; }
+    .hero-tag { background: rgba(242, 169, 0, 0.2); color: var(--secondary); padding: 0.35rem 0.85rem; border-radius: 50px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 1rem; }
+    .hero h1 { font-size: 2.75rem; font-weight: 800; line-height: 1.2; margin-bottom: 1rem; letter-spacing: -0.03em; }
+    .hero p { font-size: 1.15rem; color: #cbd5e1; margin-bottom: 2rem; max-width: 650px; margin-left: auto; margin-right: auto; }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; }
+    .btn { display: inline-flex; align-items: center; padding: 0.75rem 1.5rem; font-weight: 600; border-radius: 8px; text-decoration: none; transition: transform 0.2s, background 0.2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-gold { background: var(--secondary); color: var(--primary-dark); font-weight: 700; }
+    .btn-outline { border: 2px solid rgba(255,255,255,0.3); color: #fff; }
+
+    /* Main Content Sections */
+    .container { max-width: 1200px; margin: 0 auto; padding: 4rem 1.5rem; }
+    .section-title { margin-bottom: 2rem; }
+    .section-title h2 { font-size: 1.75rem; font-weight: 800; color: var(--primary); }
+    .section-title p { color: var(--text-muted); font-size: 0.95rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 3.5rem; }
+    
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem; box-shadow: var(--shadow); }
+    .card-badge { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 50px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .badge-upcoming { background: #dbeafe; color: #1e40af; }
+    .badge-pinned { background: #fef3c7; color: #92400e; }
+    .card h3 { font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    .card-meta { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .card p { color: #475569; font-size: 0.95rem; line-height: 1.5; }
+
+    /* Footer */
+    .footer { background: var(--primary-dark); color: #94a3b8; padding: 3rem 1.5rem 2rem; font-size: 0.9rem; border-top: 4rem; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+    .footer h4 { color: #fff; font-size: 1rem; margin-bottom: 1rem; }
+    .footer ul { list-style: none; }
+    .footer ul li { margin-bottom: 0.5rem; }
+    .footer a { color: #94a3b8; text-decoration: none; }
+    .footer a:hover { color: var(--secondary); }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; }
+  </style>
 </head>
 <body>
+
   <header class="header">
     <div class="nav-container">
-      <div class="brand">
-        <span class="brand-badge">SEBHS</span>
-        <span>FBLA</span>
-      </div>
-      <button class="mobile-toggle" aria-label="Toggle Navigation">☰</button>
+      <a href="index.html" class="brand-group">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/Future_Business_Leaders_of_America_logo.svg/1200px-Future_Business_Leaders_of_America_logo.svg.png" alt="FBLA Logo" class="brand-logo">
+        <span class="brand-title"><span class="brand-badge">SEBHS</span> FBLA</span>
+      </a>
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
@@ -21,60 +93,79 @@
         <li><a href="announcements.html">Announcements</a></li>
         <li><a href="officers.html">Officers</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li><a href="login.html" class="admin-link">Portal</a></li>
+        <li><a href="login.html" class="portal-btn">Portal</a></li>
       </ul>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-content">
-        <span class="hero-tag">Future Business Leaders of America</span>
-        <h1>Empowering the Next Generation of Business Leaders</h1>
-        <p>Developing leadership, technical, and professional capabilities through competitive events, community initiatives, and career preparation at Southeast Bulloch High School.</p>
-        <div class="hero-actions">
-          <a href="events.html" class="btn btn-secondary">View Events</a>
-          <a href="about.html" class="btn btn-outline" style="color:white; border-color:white;">Learn More</a>
-        </div>
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-tag">Southeast Bulloch High School</span>
+      <h1>Empowering the Next Generation of Business Leaders</h1>
+      <p>Developing leadership, technical, and professional capabilities through competitive events, community initiatives, and career preparation.</p>
+      <div class="hero-actions">
+        <a href="events.html" class="btn btn-gold">View Events Schedule</a>
+        <a href="about.html" class="btn btn-outline">Learn More</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <div class="container">
-      <section style="margin-bottom: 4rem;">
-        <div class="section-header">
-          <h2>Latest Announcements</h2>
-          <p>Stay updated on key dates, dues, and meeting notices.</p>
-        </div>
-        <div class="grid" id="home-announcements-grid"></div>
-      </section>
+  <main class="container">
+    <div class="section-title">
+      <h2>Latest Announcements</h2>
+      <p>Stay updated on key dates, dues, and meeting notices.</p>
+    </div>
+    <div class="grid" id="home-announcements-grid">
+      <div class="card">
+        <span class="card-badge badge-pinned">📌 Pinned Announcement</span>
+        <h3>2026-2027 Official Membership Registration Now Open</h3>
+        <div class="card-meta">Posted on Aug 20, 2026</div>
+        <p>Official membership registration for the upcoming school year is now active. Pay your annual dues online or visit Room 402 to receive your official SEHS FBLA shirt.</p>
+      </div>
+      <div class="card">
+        <h3>Competitive Event Preference Form Deadline</h3>
+        <div class="card-meta">Posted on Sep 01, 2026</div>
+        <p>Please select your top three competitive event categories by September 15th to ensure study prep materials and practice tests are ordered in time.</p>
+      </div>
+    </div>
 
-      <section>
-        <div class="section-header">
-          <h2>Featured Events</h2>
-          <p>Get involved in upcoming conferences, workshops, and competitions.</p>
-        </div>
-        <div class="grid" id="home-events-grid"></div>
-      </section>
+    <div class="section-title">
+      <h2>Featured Events</h2>
+      <p>Get involved in upcoming conferences, workshops, and competitions.</p>
+    </div>
+    <div class="grid" id="home-events-grid">
+      <div class="card">
+        <span class="card-badge badge-upcoming">Upcoming</span>
+        <h3>Fall Leadership Conference (FLC)</h3>
+        <div class="card-meta">📅 Nov 15, 2026 | 📍 Athens Convention Center</div>
+        <p>Join state-wide FBLA chapters for intensive leadership workshops, competitive event orientation, and keynote speakers.</p>
+      </div>
+      <div class="card">
+        <span class="card-badge badge-upcoming">Upcoming</span>
+        <h3>Region 4 Leadership Conference</h3>
+        <div class="card-meta">📅 Jan 22, 2027 | 📍 Georgia Southern University</div>
+        <p>Compete against regional high school chapters in accounting, web design, entrepreneurship, and public speaking.</p>
+      </div>
     </div>
   </main>
 
-  <footer>
-    <div class="footer-container">
-      <div class="footer-col">
-        <h4>SEHS FBLA</h4>
-        <p>Southeast Bulloch High School<br>Brooklet, Georgia</p>
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4 style="color: var(--secondary);">SEBHS FBLA</h4>
+        <p>Southeast Bulloch High School<br>9184 Brooklet-Denmark Rd<br>Brooklet, GA 30415</p>
       </div>
-      <div class="footer-col">
-        <h4>Navigation</h4>
+      <div>
+        <h4>Quick Links</h4>
         <ul>
           <li><a href="about.html">About Us</a></li>
           <li><a href="events.html">Events Schedule</a></li>
           <li><a href="officers.html">Chapter Officers</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <p>Email: sehs-fbla@bulloch.k12.ga.us</p>
+      <div>
+        <h4>Contact Advisor</h4>
+        <p>Email: sehs-fbla@bulloch.k12.ga.us<br>Phone: (912) 842-8400</p>
       </div>
     </div>
     <div class="footer-bottom">
