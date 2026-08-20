@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Administrator Dashboard | SEBHS FBLA</title>
+  <title>Executive Control Center | SEBHS FBLA</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <header class="header">
     <div class="nav-container">
-      <div class="brand-branding" style="display: flex; align-items: center; gap: 12px;">
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/Future_Business_Leaders_of_America_logo.svg/1200px-Future_Business_Leaders_of_America_logo.svg.png" alt="FBLA Logo" height="38">
-        <div class="brand"><span class="brand-badge">ADMIN</span> SEBHS FBLA Control Center</div>
+      <div class="brand-branding">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/Future_Business_Leaders_of_America_logo.svg/1200px-Future_Business_Leaders_of_America_logo.svg.png" alt="FBLA Logo" class="nav-logo">
+        <span class="brand"><span class="brand-badge">ADMIN</span> Control Center</span>
       </div>
       <button class="btn btn-secondary btn-sm" onclick="logoutAdmin()">Logout</button>
     </div>
   </header>
 
-  <main class="container" style="padding-top: 2rem;">
-    <!-- Metric Overview Cards -->
+  <main class="container">
+    <!-- Executive KPI Metrics Grid -->
     <div class="admin-stats-grid">
       <div class="stat-card">
         <div class="stat-number" id="stat-pending">0</div>
@@ -26,7 +26,7 @@
       </div>
       <div class="stat-card">
         <div class="stat-number" id="stat-completed">0</div>
-        <div class="stat-label">Completed Inquiries</div>
+        <div class="stat-label">Resolved Inquiries</div>
       </div>
       <div class="stat-card">
         <div class="stat-number" id="stat-events">0</div>
@@ -48,10 +48,10 @@
       <button class="tab-btn" data-tab="settings">⚙️ Settings</button>
     </div>
 
-    <!-- Pending Inquiries Tab -->
-    <div id="pending-inquiries-tab" class="tab-content card" style="padding: 1.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3>Pending Inquiries</h3>
+    <!-- Tab Sections -->
+    <div id="pending-inquiries-tab" class="tab-content card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 class="card-title">Pending Inquiries</h3>
         <span class="badge badge-upcoming" id="pending-count-badge">0 Pending</span>
       </div>
       <div class="table-responsive">
@@ -64,26 +64,24 @@
       </div>
     </div>
 
-    <!-- Completed Inquiries Tab -->
-    <div id="completed-inquiries-tab" class="tab-content card" style="display: none; padding: 1.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3>Completed / Resolved Inquiries</h3>
+    <div id="completed-inquiries-tab" class="tab-content card" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 class="card-title">Resolved Inquiries</h3>
         <span class="badge badge-pinned" id="completed-count-badge">0 Resolved</span>
       </div>
       <div class="table-responsive">
         <table>
           <thead>
-            <tr><th>Date Received</th><th>Date Resolved</th><th>Sender</th><th>Email</th><th>Message</th><th>Actions</th></tr>
+            <tr><th>Date Received</th><th>Resolved Date</th><th>Sender</th><th>Email</th><th>Message</th><th>Actions</th></tr>
           </thead>
           <tbody id="admin-completed-inquiries-list"></tbody>
         </table>
       </div>
     </div>
 
-    <!-- Events Tab -->
-    <div id="events-tab" class="tab-content card" style="display: none; padding: 1.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3>Manage Events</h3>
+    <div id="events-tab" class="tab-content card" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 class="card-title">Chapter Events</h3>
         <button class="btn btn-primary btn-sm" id="btn-add-event">+ Add Event</button>
       </div>
       <div class="table-responsive">
@@ -96,10 +94,9 @@
       </div>
     </div>
 
-    <!-- Announcements Tab -->
-    <div id="announcements-tab" class="tab-content card" style="display: none; padding: 1.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3>Manage Announcements</h3>
+    <div id="announcements-tab" class="tab-content card" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 class="card-title">Announcements</h3>
         <button class="btn btn-primary btn-sm" id="btn-add-announcement">+ Create Announcement</button>
       </div>
       <div class="table-responsive">
@@ -112,10 +109,9 @@
       </div>
     </div>
 
-    <!-- Officers Tab -->
-    <div id="officers-tab" class="tab-content card" style="display: none; padding: 1.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3>Manage Officers</h3>
+    <div id="officers-tab" class="tab-content card" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 class="card-title">Officer Team</h3>
         <button class="btn btn-primary btn-sm" id="btn-add-officer">+ Add Officer</button>
       </div>
       <div class="table-responsive">
@@ -128,10 +124,9 @@
       </div>
     </div>
 
-    <!-- Settings Tab -->
-    <div id="settings-tab" class="tab-content card" style="display: none; padding: 1.5rem;">
-      <h3>Chapter Settings</h3>
-      <form id="settings-form" style="max-width: 500px; margin-top: 1rem;">
+    <div id="settings-tab" class="tab-content card" style="display: none;">
+      <h3 class="card-title" style="margin-bottom: 1.25rem;">Settings</h3>
+      <form id="settings-form" style="max-width: 500px;">
         <div class="form-group"><label>Contact Email</label><input type="email" id="set-email" class="form-control"></div>
         <div class="form-group"><label>Phone Number</label><input type="text" id="set-phone" class="form-control"></div>
         <div class="form-group"><label>School Address</label><input type="text" id="set-address" class="form-control"></div>
@@ -140,13 +135,11 @@
     </div>
   </main>
 
-  <!-- Modal -->
+  <!-- Modal Container -->
   <div class="modal" id="admin-modal">
     <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="modal-title">Modal</h3>
-        <button class="close-btn" onclick="closeModal()">&times;</button>
-      </div>
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <h3 id="modal-title" style="margin-bottom: 1.25rem; font-size: 1.35rem;">Modal</h3>
       <div id="modal-body"></div>
     </div>
   </div>
