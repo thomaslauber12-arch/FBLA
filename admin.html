@@ -9,22 +9,79 @@
 <body>
   <header class="header">
     <div class="nav-container">
-      <div class="brand"><span class="brand-badge">ADMIN</span> SEBHS FBLA Dashboard</div>
+      <div class="brand-branding" style="display: flex; align-items: center; gap: 12px;">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/Future_Business_Leaders_of_America_logo.svg/1200px-Future_Business_Leaders_of_America_logo.svg.png" alt="FBLA Logo" height="38">
+        <div class="brand"><span class="brand-badge">ADMIN</span> SEBHS FBLA Control Center</div>
+      </div>
       <button class="btn btn-secondary btn-sm" onclick="logoutAdmin()">Logout</button>
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" style="padding-top: 2rem;">
+    <!-- Metric Overview Cards -->
+    <div class="admin-stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" id="stat-pending">0</div>
+        <div class="stat-label">Pending Inquiries</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="stat-completed">0</div>
+        <div class="stat-label">Completed Inquiries</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="stat-events">0</div>
+        <div class="stat-label">Active Events</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="stat-officers">0</div>
+        <div class="stat-label">Chapter Officers</div>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
     <div class="admin-tabs">
-      <button class="tab-btn active" data-tab="events">Events</button>
-      <button class="tab-btn" data-tab="announcements">Announcements</button>
-      <button class="tab-btn" data-tab="officers">Officers</button>
-      <button class="tab-btn" data-tab="inquiries">Inquiries</button>
-      <button class="tab-btn" data-tab="settings">Settings</button>
+      <button class="tab-btn active" data-tab="pending-inquiries">📬 Pending Inquiries</button>
+      <button class="tab-btn" data-tab="completed-inquiries">✅ Completed Inquiries</button>
+      <button class="tab-btn" data-tab="events">📅 Events</button>
+      <button class="tab-btn" data-tab="announcements">📢 Announcements</button>
+      <button class="tab-btn" data-tab="officers">👥 Officers</button>
+      <button class="tab-btn" data-tab="settings">⚙️ Settings</button>
+    </div>
+
+    <!-- Pending Inquiries Tab -->
+    <div id="pending-inquiries-tab" class="tab-content card" style="padding: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3>Pending Inquiries</h3>
+        <span class="badge badge-upcoming" id="pending-count-badge">0 Pending</span>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Sender</th><th>Email</th><th>Message</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="admin-pending-inquiries-list"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Completed Inquiries Tab -->
+    <div id="completed-inquiries-tab" class="tab-content card" style="display: none; padding: 1.5rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3>Completed / Resolved Inquiries</h3>
+        <span class="badge badge-pinned" id="completed-count-badge">0 Resolved</span>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr><th>Date Received</th><th>Date Resolved</th><th>Sender</th><th>Email</th><th>Message</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="admin-completed-inquiries-list"></tbody>
+        </table>
+      </div>
     </div>
 
     <!-- Events Tab -->
-    <div id="events-tab" class="tab-content">
+    <div id="events-tab" class="tab-content card" style="display: none; padding: 1.5rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
         <h3>Manage Events</h3>
         <button class="btn btn-primary btn-sm" id="btn-add-event">+ Add Event</button>
@@ -40,7 +97,7 @@
     </div>
 
     <!-- Announcements Tab -->
-    <div id="announcements-tab" class="tab-content" style="display: none;">
+    <div id="announcements-tab" class="tab-content card" style="display: none; padding: 1.5rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
         <h3>Manage Announcements</h3>
         <button class="btn btn-primary btn-sm" id="btn-add-announcement">+ Create Announcement</button>
@@ -56,7 +113,7 @@
     </div>
 
     <!-- Officers Tab -->
-    <div id="officers-tab" class="tab-content" style="display: none;">
+    <div id="officers-tab" class="tab-content card" style="display: none; padding: 1.5rem;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
         <h3>Manage Officers</h3>
         <button class="btn btn-primary btn-sm" id="btn-add-officer">+ Add Officer</button>
@@ -71,23 +128,8 @@
       </div>
     </div>
 
-    <!-- Inquiries Tab -->
-    <div id="inquiries-tab" class="tab-content" style="display: none;">
-      <div style="margin-bottom: 1rem;">
-        <h3>Received Inquiries</h3>
-      </div>
-      <div class="table-responsive">
-        <table>
-          <thead>
-            <tr><th>Date</th><th>Name</th><th>Email</th><th>Message</th><th>Actions</th></tr>
-          </thead>
-          <tbody id="admin-inquiries-list"></tbody>
-        </table>
-      </div>
-    </div>
-
     <!-- Settings Tab -->
-    <div id="settings-tab" class="tab-content" style="display: none;">
+    <div id="settings-tab" class="tab-content card" style="display: none; padding: 1.5rem;">
       <h3>Chapter Settings</h3>
       <form id="settings-form" style="max-width: 500px; margin-top: 1rem;">
         <div class="form-group"><label>Contact Email</label><input type="email" id="set-email" class="form-control"></div>
