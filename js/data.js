@@ -177,7 +177,7 @@ class DataStore {
   }
 
   login(username, password) {
-    if (username === "admin" && password === "fbla2026!") {
+    if (username === "FBLAOfficers2026" && password === "SEBHSFBLA2026") {
       sessionStorage.setItem("sehs_fbla_admin_session", "true");
       return true;
     }
