@@ -48,9 +48,22 @@ function setupContactForm() {
     const message = document.getElementById("contact-message").value;
 
     db.saveInquiry({ name, email, message });
-    showToast("Message sent! We will respond shortly.");
     form.reset();
+
+    const modal = document.getElementById("confirmation-modal");
+    if (modal) {
+      modal.classList.add("open");
+    } else {
+      alert("Inquiry submitted! Please check your email over the next 24-48 hours. You should receive an email from an officer or advisor.");
+    }
   });
+}
+
+function closeConfirmationModal() {
+  const modal = document.getElementById("confirmation-modal");
+  if (modal) {
+    modal.classList.remove("open");
+  }
 }
 
 function showToast(message) {
