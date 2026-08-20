@@ -97,17 +97,36 @@ class DataStore {
     }
   }
 
-  // Inquiries
+  // Inquiries Logic
   getInquiries() {
     return JSON.parse(localStorage.getItem("sehs_fbla_inquiries") || "[]");
+  }
+
+  getPendingInquiries() {
+    return this.getInquiries().filter(i => i.status !== "completed");
+  }
+
+  getCompletedInquiries() {
+    return this.getInquiries().filter(i => i.status === "completed");
   }
 
   saveInquiry(inquiry) {
     const inquiries = this.getInquiries();
     inquiry.id = "inq-" + Date.now();
     inquiry.date = new Date().toLocaleDateString();
+    inquiry.status = "pending";
     inquiries.unshift(inquiry);
     localStorage.setItem("sehs_fbla_inquiries", JSON.stringify(inquiries));
+  }
+
+  markInquiryCompleted(id) {
+    const inquiries = this.getInquiries();
+    const item = inquiries.find(i => i.id === id);
+    if (item) {
+      item.status = "completed";
+      item.completedDate = new Date().toLocaleDateString();
+      localStorage.setItem("sehs_fbla_inquiries", JSON.stringify(inquiries));
+    }
   }
 
   deleteInquiry(id) {
@@ -115,7 +134,7 @@ class DataStore {
     localStorage.setItem("sehs_fbla_inquiries", JSON.stringify(inquiries));
   }
 
-  // Events
+  // Events Logic
   getEvents() {
     return JSON.parse(localStorage.getItem("sehs_fbla_events") || "[]");
   }
@@ -137,7 +156,7 @@ class DataStore {
     localStorage.setItem("sehs_fbla_events", JSON.stringify(events));
   }
 
-  // Announcements
+  // Announcements Logic
   getAnnouncements() {
     return JSON.parse(localStorage.getItem("sehs_fbla_announcements") || "[]");
   }
@@ -159,7 +178,7 @@ class DataStore {
     localStorage.setItem("sehs_fbla_announcements", JSON.stringify(items));
   }
 
-  // Officers
+  // Officers Logic
   getOfficers() {
     return JSON.parse(localStorage.getItem("sehs_fbla_officers") || "[]");
   }
@@ -181,7 +200,7 @@ class DataStore {
     localStorage.setItem("sehs_fbla_officers", JSON.stringify(officers));
   }
 
-  // Settings
+  // Settings Logic
   getSettings() {
     return JSON.parse(localStorage.getItem("sehs_fbla_settings") || "{}");
   }
@@ -190,7 +209,7 @@ class DataStore {
     localStorage.setItem("sehs_fbla_settings", JSON.stringify(settings));
   }
 
-  // Authentication
+  // Authentication Logic
   isAuthenticated() {
     return sessionStorage.getItem("sehs_fbla_admin_session") === "true";
   }
