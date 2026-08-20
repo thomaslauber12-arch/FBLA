@@ -31,6 +31,7 @@ function renderAdminTables() {
   renderEventsTable();
   renderAnnouncementsTable();
   renderOfficersTable();
+  renderInquiriesTable();
   loadSettingsForm();
 }
 
@@ -80,6 +81,29 @@ function renderOfficersTable() {
       <td>${o.position}</td>
       <td>
         <button class="btn btn-danger btn-sm" onclick="deleteOfficerItem('${o.id}')">Delete</button>
+      </td>
+    </tr>
+  `).join("");
+}
+
+function renderInquiriesTable() {
+  const tbody = document.getElementById("admin-inquiries-list");
+  if (!tbody) return;
+
+  const inquiries = db.getInquiries();
+  if (inquiries.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" class="text-muted" style="text-align: center;">No inquiries received yet.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = inquiries.map(i => `
+    <tr>
+      <td>${i.date}</td>
+      <td><strong>${i.name}</strong></td>
+      <td><a href="mailto:${i.email}">${i.email}</a></td>
+      <td>${i.message}</td>
+      <td>
+        <button class="btn btn-danger btn-sm" onclick="deleteInquiryItem('${i.id}')">Delete</button>
       </td>
     </tr>
   `).join("");
@@ -149,6 +173,13 @@ window.deleteOfficerItem = function(id) {
   if (confirm("Are you sure you want to delete this officer?")) {
     db.deleteOfficer(id);
     renderOfficersTable();
+  }
+};
+
+window.deleteInquiryItem = function(id) {
+  if (confirm("Are you sure you want to delete this inquiry?")) {
+    db.deleteInquiry(id);
+    renderInquiriesTable();
   }
 };
 
