@@ -19,6 +19,7 @@
       <button class="tab-btn active" data-tab="events">Events</button>
       <button class="tab-btn" data-tab="announcements">Announcements</button>
       <button class="tab-btn" data-tab="officers">Officers</button>
+      <button class="tab-btn" data-tab="inquiries">Inquiries</button>
       <button class="tab-btn" data-tab="settings">Settings</button>
     </div>
 
@@ -66,6 +67,21 @@
             <tr><th>Name</th><th>Position</th><th>Actions</th></tr>
           </thead>
           <tbody id="admin-officers-list"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Inquiries Tab -->
+    <div id="inquiries-tab" class="tab-content" style="display: none;">
+      <div style="margin-bottom: 1rem;">
+        <h3>Received Inquiries</h3>
+      </div>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Name</th><th>Email</th><th>Message</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="admin-inquiries-list"></tbody>
         </table>
       </div>
     </div>
